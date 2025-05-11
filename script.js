@@ -3,13 +3,21 @@ playGame();
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    
+    const computerChoice = getComputerChoice();
 
-    for (let i = 0; i < 5; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
-    }
+    const rock = document.querySelector(".rock");
+    rock.addEventListener("click", () => playRound("rock", computerChoice));
 
+    const paper = document.querySelector(".paper");
+    paper.addEventListener("click", () => playRound("paper", computerChoice));
+
+    const scissors = document.querySelector(".scissors");
+    scissors.addEventListener("click", () => playRound("scissors", computerChoice));
+    
+    // const humanChoice = getHumanChoice();
+    // playRound(humanChoice, computerChoice);
+    
     function playRound(humanChoice, computerChoice) {
         //To make something case-insensitive, 
         // convert everything to either lower case or uppercase
@@ -18,37 +26,46 @@ function playGame() {
     
         if (humanChoice == "scissors") {
             if (computerChoice == "scissors") {
-                console.log("It's a draw! Both chose Scissors");
+                const display = document.querySelector(".display")
+                display.textContent = "It's a draw! Both chose Scissors";
             } else if (computerChoice == "paper") {
                 humanScore++;
-                console.log("You win! Scissors beats Paper");
+                const display = document.querySelector(".display");
+                display.textContent = "You win! Scissors beats Paper";
             } else {
                 computerScore++;
-                console.log("You lose! Rock beats Scissors");
+                const display = document.querySelector(".display");
+                display.textContent = "You lose! Rock beats Scissors";
             }
         }
     
         if (humanChoice == "paper") {
             if (computerChoice == "paper") {
-                console.log("It's a draw! Both chose Paper");
+                const display = document.querySelector(".display");
+                display.textContent = "It's a draw! Both chose Paper";
             } else if (computerChoice == "scissors") {
                 computerScore++;
-                console.log("You lose! Scissors beats Paper");
+                const display = document.querySelector(".display");
+                display.textContent = "You lose! Scissors beats Paper";
             } else {
                 humanScore++;
-                console.log("You win! Paper beats Rock");
+                const display = document.querySelector(".display");
+                display.textContent  = "You win! Paper beats Rock";
             }
         }
     
         if (humanChoice == "rock") {
             if (computerChoice == "scissors") {
                 humanScore++;
-                console.log("You win! Rock beats Scissors");
+                const display = document.querySelector(".display");
+                display.textContent = "You win! Rock beats Scissors";
             } else if (computerChoice == "paper") {
                 computerScore++;
-                console.log("You lose! Paper beats Rock");
+                const display = document.querySelector(".display");
+                display.textContent = "You lose! Paper beats Rock";
             } else {
-                console.log("It's a draw! Both chose Rock");
+                const display = document.querySelector(".display");
+                display.textContent = "It's a draw! Both chose Rock";
             }
         }
     }    
@@ -65,8 +82,8 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let sign = window.prompt("What is your choice");
-    return sign;
-}
+// function getHumanChoice() {
+//     let sign = window.prompt("What is your choice");
+//     return sign;
+// }
 
