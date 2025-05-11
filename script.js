@@ -3,18 +3,16 @@ playGame();
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    
-    const computerChoice = getComputerChoice();
 
     const rock = document.querySelector(".rock");
-    rock.addEventListener("click", () => playRound("rock", computerChoice));
+    rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
 
     const paper = document.querySelector(".paper");
-    paper.addEventListener("click", () => playRound("paper", computerChoice));
+    paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
 
     const scissors = document.querySelector(".scissors");
-    scissors.addEventListener("click", () => playRound("scissors", computerChoice));
-    
+    scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()));
+
     // const humanChoice = getHumanChoice();
     // playRound(humanChoice, computerChoice);
     
@@ -23,33 +21,30 @@ function playGame() {
         // convert everything to either lower case or uppercase
         humanChoice = humanChoice.toLowerCase();
         computerChoice = computerChoice.toLowerCase();
+        const newHumanScore = document.querySelector(".humanScore");
+        const newComputerScore = document.querySelector(".computerScore");
+        const display = document.querySelector(".display")
     
         if (humanChoice == "scissors") {
             if (computerChoice == "scissors") {
-                const display = document.querySelector(".display")
                 display.textContent = "It's a draw! Both chose Scissors";
             } else if (computerChoice == "paper") {
                 humanScore++;
-                const display = document.querySelector(".display");
                 display.textContent = "You win! Scissors beats Paper";
             } else {
                 computerScore++;
-                const display = document.querySelector(".display");
                 display.textContent = "You lose! Rock beats Scissors";
             }
         }
     
         if (humanChoice == "paper") {
             if (computerChoice == "paper") {
-                const display = document.querySelector(".display");
                 display.textContent = "It's a draw! Both chose Paper";
             } else if (computerChoice == "scissors") {
                 computerScore++;
-                const display = document.querySelector(".display");
                 display.textContent = "You lose! Scissors beats Paper";
             } else {
                 humanScore++;
-                const display = document.querySelector(".display");
                 display.textContent  = "You win! Paper beats Rock";
             }
         }
@@ -57,17 +52,24 @@ function playGame() {
         if (humanChoice == "rock") {
             if (computerChoice == "scissors") {
                 humanScore++;
-                const display = document.querySelector(".display");
                 display.textContent = "You win! Rock beats Scissors";
             } else if (computerChoice == "paper") {
                 computerScore++;
-                const display = document.querySelector(".display");
                 display.textContent = "You lose! Paper beats Rock";
             } else {
-                const display = document.querySelector(".display");
                 display.textContent = "It's a draw! Both chose Rock";
             }
         }
+         newHumanScore.textContent = humanScore;
+         newComputerScore.textContent = computerScore;
+
+         if (humanScore == 5 || computerScore == 5) {
+            rock.disabled = true;
+            paper.disabled = true;
+            scissors.disabled = true;
+
+            humanScore == 5 ? display.textContent = "You win!" : display.textContent = "You lose!"
+         }
     }    
 }
 
